@@ -1,0 +1,9 @@
+torch==2.0.1
+torchvision==0.15.2
+torch-geometric==2.4.0
+torch-spline-conv==1.2.2
+torch-scatter==2.1.2
+numpy==1.26.4
+scipy==1.15.3
+Pillow==12.3.0
+ninja
