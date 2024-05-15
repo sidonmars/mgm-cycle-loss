@@ -16,6 +16,22 @@ on shared keypoints; VOC unfiltered is F1 with all keypoints):
 | seed 99 | 69.4 | 63.3 | 43.3 |
 | **mean ± sd** | **69.4 ± 0.1** | **63.1 ± 0.6** | **43.5 ± 0.3** |
 
+## Differences from the paper
+
+The core of the method is the same as in the paper. We added a few ideas that
+stabilize training and make it less sensitive to seed initialization:
+
+1. The original paper uses keypoint position embeddings. We found that with
+   more augmentations they are no longer needed.
+2. The cycle loss is slightly different from the one in the CLUM paper. It uses
+   Cohen Indelman and Hazan's formulation, which is mathematically near
+   identical but smooths the gradient more, which leads to more stable training.
+3. The cycle paths are built from an EMA copy of the matcher instead of the
+   matcher being trained, again for more stable updates.
+
+The results can be regenerated without these changes and stay within about a
+point on each metric. Training is just more stable this way.
+
 ## Setup
 
 Python 3.10, a CUDA GPU, and the CUDA toolkit (`nvcc`): two small CUDA
